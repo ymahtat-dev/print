@@ -49,15 +49,15 @@
         <io.micrometer.prometheus.version>1.4.2</io.micrometer.prometheus.version>
         <gson.version>2.8.4</gson.version>
         <kernel.websub.version>1.2.1-SNAPSHOT</kernel.websub.version>
-		<itextcore.version>7.1.0</itextcore.version>
+		<itextcore.version>7.2.4</itextcore.version>
 		<itexthtml2pdf.version>2.0.0</itexthtml2pdf.version>
 		<itext.version>5.5.13</itext.version>
 		<commons-math3>3.6.1</commons-math3>
 		<commons-io>2.6</commons-io>
 		<commons-codec>1.11</commons-codec>
-		<bouncycastle.version>1.68</bouncycastle.version>
+		<bouncycastle.version>1.78</bouncycastle.version>
 		<jwt.version> 3.8.1</jwt.version>
-		<google.zxing.version>3.3.3</google.zxing.version>
+		<google.zxing.version>3.4.1</google.zxing.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
