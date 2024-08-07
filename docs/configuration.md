@@ -1,7 +1,7 @@
 # Print Service Configuration Guide
 
 ## Overview
-The guide here lists down some of the important properties that may be customised for a given installation. Note that the listing here is not exhaustive, but a checklist to review properties that are likely to be different from default. If you would like to see all the properites, then refer to the files listed below.
+The guide here lists down some of the important properties that may be customised for a given installation. Note that the listing here is not exhaustive, but a checklist to review properties that are likely to be different from default. If you would like to see all the properties, then refer to the files listed below.
 
 ## Configuration files
 Print service uses the following configuration files:
@@ -11,6 +11,12 @@ print-default.properties
 registration-processor-print-text-file.json
 identity-mapping.json
 ```
+## Configuration
+[Configuration-Application](https://github.com/mosip/mosip-config/blob/develop/application-default.properties),
+[Configuration-Print](https://github.com/mosip/mosip-config/blob/develop/print-default.properties),
+[Configuration-RegProcPrintTextFile](https://github.com/mosip/mosip-config/blob/develop/registration-processor-print-text-file.json) and
+[Configuration-IdMapping](https://github.com/mosip/mosip-config/blob/develop/identity-mapping.json) defined here.
+
 Refer [Module Configuration](https://docs.mosip.io/1.2.0/modules/module-configuration) for location of these files.
 
 ## Template
@@ -34,7 +40,7 @@ print-WebSub-resubscription-delay-millisecs = // resubscription delay time.
 mosip.event.secret = //secret key 
 ```
 
-## Datashare
+## DataShare
 ```
 mosip.datashare.partner.id = /your partner id from partner portal
 mosip.datashare.policy.id = /your policy id from partner portal
