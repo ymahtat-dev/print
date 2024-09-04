@@ -32,10 +32,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.mosip.print.exception.*;
 import io.mosip.vercred.CredentialsVerifier;
 import io.mosip.vercred.exception.ProofDocumentNotFoundException;
-import io.mosip.vercred.exception.ProofTypeNotFoundException;
+import io.mosip.vercred.exception.ProofTypeNotSupportedException;
 import io.mosip.vercred.exception.PubicKeyNotFoundException;
 import io.mosip.vercred.exception.UnknownException;
 import org.apache.commons.codec.binary.Base64;
@@ -49,7 +48,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import io.mosip.print.constant.CredentialStatusConstant;
 import io.mosip.print.constant.EventId;
@@ -177,8 +175,7 @@ public class PrintServiceImpl implements PrintService {
 	@Autowired
 	private Environment env;
 
-	@Autowired
-	private CredentialsVerifier credentialsVerifier;
+	private CredentialsVerifier credentialsVerifier= new CredentialsVerifier();
 
 	@Value("${mosip.datashare.partner.id}")
 	private String partnerId;
@@ -241,13 +238,13 @@ public class PrintServiceImpl implements PrintService {
         if (verifyCredentialsFlag) {
             printLogger.info("Configured received credentials to be verified. Flag {}", verifyCredentialsFlag);
             try {
-                boolean verified = credentialsVerifier.verifyPrintCredentials(decodedCredential);
+                boolean verified = credentialsVerifier.verifyCredentials(decodedCredential);
                 if (!verified) {
                     printLogger.error("Received Credentials failed in verifiable credential verify method. So, the credentials will not be printed." +
                             " Id: {}, Transaction Id: {}", eventModel.getEvent().getId(), eventModel.getEvent().getTransactionId());
                     return false;
                 }
-            } catch (ProofDocumentNotFoundException | ProofTypeNotFoundException e) {
+            } catch (ProofDocumentNotFoundException | ProofTypeNotSupportedException e) {
                 printLogger.error("Proof document is not available in the received credentials." +
                         " Id: {}, Transaction Id: {}", eventModel.getEvent().getId(), eventModel.getEvent().getTransactionId());
                 return false;
@@ -394,8 +391,6 @@ public class PrintServiceImpl implements PrintService {
 			description.setMessage(PlatformErrorMessages.PRT_PRT_PDF_GENERATION_FAILED.getMessage());
 			description.setCode(PlatformErrorMessages.PRT_PRT_PDF_GENERATION_FAILED.getCode());
 			printLogger.error(ex.getMessage() ,ex);
-			throw new PDFGeneratorException(PDFGeneratorExceptionCodeConstant.PDF_EXCEPTION.getErrorCode(),
-					ex.getMessage() ,ex);
 
 		} finally {
 			String eventId = "";
