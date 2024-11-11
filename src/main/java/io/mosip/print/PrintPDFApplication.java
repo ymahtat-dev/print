@@ -33,6 +33,11 @@ public class PrintPDFApplication {
 	}
 
 	@Bean
+	public CredentialsVerifier credentialsVerifier() {
+		return new CredentialsVerifier();
+	}
+
+	@Bean
 	public ThreadPoolTaskScheduler taskScheduler() {
 		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 		threadPoolTaskScheduler.setPoolSize(5);
