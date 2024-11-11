@@ -4,7 +4,7 @@
 Following tools required to run the print service locally.
 
 1. _Ngrok_ to expose local port to remote to communicate with websub
-2. The project requires Java 21 and mvn version - 3.9.6.
+2. The project requires JDK 21.0.3 and mvn version - 3.9.6.
 3. [Config Server](https://docs.mosip.io/1.2.0/modules/module-configuration) running in respective environment.
 
 ## Build
