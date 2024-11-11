@@ -3,20 +3,13 @@
 ## Overview
 The guide here lists down some of the important properties that may be customised for a given installation. Note that the listing here is not exhaustive, but a checklist to review properties that are likely to be different from default. If you would like to see all the properties, then refer to the files listed below.
 
-## Configuration files
+## Configuration
 Print service uses the following configuration files that are accessible in this [repository](https://github.com/mosip/mosip-config/tree/master).
 Please refer to the required released tagged version for configuration.
-```
-application-default.properties
-print-default.properties
-registration-processor-print-text-file.json
-identity-mapping.json
-```
-## Configuration
-[Configuration-Application](https://github.com/mosip/mosip-config/blob/master/application-default.properties),
-[Configuration-Print](https://github.com/mosip/mosip-config/blob/master/print-default.properties),
-[Configuration-RegProcPrintTextFile](https://github.com/mosip/mosip-config/blob/master/registration-processor-print-text-file.json) and
-[Configuration-IdMapping](https://github.com/mosip/mosip-config/blob/master/identity-mapping.json) defined here.
+1. [Configuration-Application](https://github.com/mosip/mosip-config/blob/master/application-default.properties)
+2. [Configuration-Print](https://github.com/mosip/mosip-config/blob/master/print-default.properties)
+3. [Configuration-RegProcPrintTextFile](https://github.com/mosip/mosip-config/blob/master/registration-processor-print-text-file.json) 
+4. [Configuration-IdMapping](https://github.com/mosip/mosip-config/blob/master/identity-mapping.json)
 
 Refer [Module Configuration](https://docs.mosip.io/1.2.0/modules/module-configuration) for location of these files.
 
