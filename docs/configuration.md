@@ -5,6 +5,7 @@ The guide here lists down some of the important properties that may be customise
 
 ## Configuration files
 Print service uses the following configuration files that are accessible in this [repository](https://github.com/mosip/mosip-config/tree/master).
+Please refer to the required released tagged version for configuration.
 ```
 application-default.properties
 print-default.properties
