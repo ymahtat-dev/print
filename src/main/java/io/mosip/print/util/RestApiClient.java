@@ -3,6 +3,8 @@ package io.mosip.print.util;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Iterator;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -117,8 +119,12 @@ public class RestApiClient {
 				Iterator<String> iterator = httpHeader.keySet().iterator();
 				while (iterator.hasNext()) {
 					String key = iterator.next();
-					if (!(headers.containsKey("Content-Type") && key.equals("Content-Type")))
-						headers.add(key, httpHeader.get(key).get(0));
+					if (!(headers.containsKey("Content-Type") && key.equals("Content-Type"))) {
+						List<String> values = httpHeader.get(key);
+						if (values != null && !values.isEmpty()) {
+							headers.add(key, values.getFirst());
+						}
+					}
 				}
 				return new HttpEntity<Object>(httpEntity.getBody(), headers);
 			} catch (ClassCastException | NullPointerException e) {
