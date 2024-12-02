@@ -644,8 +644,11 @@ public class PrintServiceImpl implements PrintService {
      * @throws Exception
      */
     private String getPassword(org.json.JSONObject jsonObject) throws ApisResourceAccessException, IOException {
-
-        String[] attributes = env.getProperty(UINCARDPASSWORD).split("\\|");
+		String propertyValue = env.getProperty(UINCARDPASSWORD);
+		if (Objects.isNull(propertyValue)) {
+			throw new NullPointerException("Environment property '" + UINCARDPASSWORD + "' is missing.");
+		}
+        String[] attributes = propertyValue.split("\\|");
         List<String> list = new ArrayList<>(Arrays.asList(attributes));
         Iterator<String> it = list.iterator();
         String uinCardPd = "";
@@ -659,16 +662,16 @@ public class PrintServiceImpl implements PrintService {
                 } catch (Exception e) {
                     obj = object;
                 }
-            }
-            if (obj instanceof JSONArray) {
-                JsonValue[] jsonValues = JsonUtil.mapJsonNodeToJavaObject(JsonValue.class, (JSONArray) obj);
-                uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute(getParameter(jsonValues, templateLang)));
+                if (obj instanceof JSONArray) {
+                    JsonValue[] jsonValues = JsonUtil.mapJsonNodeToJavaObject(JsonValue.class, (JSONArray) obj);
+                    uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute(getParameter(jsonValues, templateLang)));
 
-            } else if (object instanceof org.json.simple.JSONObject) {
-                org.json.simple.JSONObject json = (org.json.simple.JSONObject) object;
-                uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute((String) json.get(VALUE)));
-            } else {
-                uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute(object.toString()));
+                } else if (object instanceof org.json.simple.JSONObject) {
+                    org.json.simple.JSONObject json = (org.json.simple.JSONObject) object;
+                    uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute((String) json.get(VALUE)));
+                } else {
+                    uinCardPd = uinCardPd.concat(getFormattedPasswordAttribute(object.toString()));
+                }
             }
         }
         return uinCardPd;
